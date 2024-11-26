@@ -1,17 +1,23 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Navbar.css'
-import logo from '../../assets/logo.png';
 import search from '../../assets/search_icon.svg'
 import bell_icon from '../../assets/bell_icon.svg'
 import profile_img from '../../assets/profile_img.png'
 import caret_icon from '../../assets/caret_icon.svg'
-import { logout } from '../../firebase';
+import { useNavigate } from 'react-router-dom'
 
-const Navbar = () => {
+// import { logout } from '../../firebase';
+
+const Navbar = ({ settings }) => {
 
     const navRef = useRef();
+    const navigate = useNavigate();
+    const [userlogin, setUserlogin] = useState(false);
 
     useEffect(() => {
+        const token = localStorage.getItem("token");
+        setUserlogin(!!token);
+
         const handleScroll = () => {
             if (navRef.current) {
                 if (window.scrollY >= 80) {
@@ -29,10 +35,22 @@ const Navbar = () => {
         };
     }, [])
 
-    return (
+    const handlelogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        navigate("/login");
+        setUserlogin(true);
+    }
+    const handlelogin = () => {
+        navigate("/login");
+    }
+    const profilepage = () => {
+        navigate("/profile");
+    }
+    return (    
         <div className='navbar' ref={navRef}>
             <div className='navbar-left'>
-                <img src={logo} alt='' />
+                {settings && settings.data && settings.data[0].logo && (<img src={settings.data[0].logo} alt='' />)}
                 <ul>
                     <li>Home</li>
                     <li>TV Show</li>
@@ -46,13 +64,21 @@ const Navbar = () => {
                 <img src={search} alt='' className='icons' />
                 <p>Children</p>
                 <img src={bell_icon} alt='' className='icons' />
-                <div className='navbar-profile'>
-                    <img src={profile_img} alt='' className='profile' />
-                    <img src={caret_icon} alt='' />
-                    <div className='dropdown'>
-                        <p onClick={()=>{logout()}}>Sign Out of Netfilx</p>
-                    </div>
-                </div>
+                {userlogin ?
+                    (
+                        <div className='navbar-profile'>
+                            <img src={profile_img} alt='' className='profile' onClick={profilepage} />
+                            <img src={caret_icon} alt='' />
+                            <div className='dropdown'>
+                                <p onClick={handlelogout}>Sign Out of Netfilx</p>
+                            </div>
+                        </div>
+                    ) :
+                    (
+                        <button className='button' onClick={handlelogin}>Sign In</button>
+                    )
+                }
+
             </div>
         </div>
     )

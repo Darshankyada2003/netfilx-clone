@@ -75,3 +75,10 @@ react-router-dom: npm i react-router-dom
 firebase : npm install firebase react-firebase-hook
 
 notification :  npm i react-toastify
+
+.env : npm i dotenv 
+
+axios: npm install axios
+
+popup  : npm i reactjs-popup
+

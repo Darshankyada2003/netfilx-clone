@@ -1,0 +1,199 @@
+.profile-page {
+    height: 100vh;
+    padding: 20px 8%;
+    background-image: linear-gradient(#0000007e, #0000007e), url(/public/background_banner.jpg);
+
+}
+
+.profile-logo {
+    width: 150px;
+    cursor: pointer;
+}
+
+.profile-form {
+    width: 100%;
+    max-width: 450px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    padding: 60px;
+    margin: auto;
+}
+
+.profile-form h1 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.profile-form ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+.profile-form li {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.profile-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.profile-input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.profile-form label {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.updateprofile {
+    width: 100%;
+    background: #000000;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #7d232e;
+}
+
+.updateprofile:hover {
+    background: #de310a;
+}
+
+
+.popup-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9998;
+    /* Ensure it sits above most elements */
+}
+
+/* Popup content container */
+.resetpassword-form {
+    background: #070606;
+    /* Popup background */
+    border-radius: 8px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    /* Width for smaller screens */
+    max-width: 400px;
+    /* Max width for larger screens */
+    z-index: 9999;
+    /* Sits above the overlay */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Popup header */
+.resetpassword-form h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fdfdfd;
+    /* Text color */
+}
+
+/* Form inputs */
+.resetpassword-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Buttons */
+.resetpassword-form button {
+    width: 100%;
+    background: #000000;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #fbfbfb;
+}
+
+.resetpassword-form button:hover {
+    background: #17e74bad;
+    /* Darker blue on hover */
+}
+
+.resetpassword-form button[type="button"] {
+    background-color: #050807;
+    border: 2px solid white;
+    /* Grey for cancel */
+}
+
+.resetpassword-form button[type="button"]:hover {
+    background-color: #e71111;
+    /* Darker grey on hover */
+}
+
+.changepassowrd {
+    display: flex;
+    color: white;
+    text-decoration: none;
+}
+
+.resetpassword-form .alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 19px;
+    margin: 40px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    max-width: 500px;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    transition: opacity 0.3s ease;
+}
+
+.alert.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.resetpassword-form .error {
+    color: red;
+    position: relative;
+    margin: 1px;
+    left: -116px;
+}
+
+.resetpassword-form .error2 {
+    color: red;
+    margin: 2px;
+    position: relative;
+    left: -100px;
+}

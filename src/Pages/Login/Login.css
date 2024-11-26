@@ -6,6 +6,7 @@
 
 .login-logo {
     width: 150px;
+    cursor: pointer;
 }
 
 .login-form {
@@ -35,11 +36,17 @@
     padding: 16px 20px;
     font-size: 16px;
     font-weight: 500;
+    margin-bottom: 5px;
 }
 
 .login-form input::placeholder {
     font-size: 16px;
     font-weight: 500;
+}
+
+.login-form .error {
+    color: red;
+    margin-bottom: 10px;
 }
 
 .login-form button {
@@ -97,6 +104,53 @@
 
 .login-sinner img {
     width: 60px;
+}
+
+.forgotpassword {
+    display: flex;
+    color: white;
+    text-decoration: none;
+}
+
+.login-form .alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    max-width: 500px;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    transition: opacity 0.3s ease;
+}
+
+.alert.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* .eyeicon {
+    margin: 139px;
+    position: relative;
+    top: 50%;
+    right: 501px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    margin-bottom: 20px;
+} */
+.password-toggle-icon {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    margin: -33px;
 }
 
 @media (max-width: 500px) {

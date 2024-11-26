@@ -72,6 +72,34 @@
     cursor: pointer;
 }
 
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid #7d232e;
+}
+
+.button:hover {
+    background-color: hsl(0, 89%, 34%);
+}
+
+.button:active {
+    transform: scale(0.95);
+}
+
+.button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
 .navbar-profile:hover .dropdown {
     display: block;
 }

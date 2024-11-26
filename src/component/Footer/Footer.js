@@ -6,14 +6,43 @@ import instagram_icon from '../../assets/instagram_icon.png'
 import facebook_icon from '../../assets/facebook_icon.png'
 
 
-const Footer = () => {
+const Footer = ({ settings }) => {
+
   return (
     <div className='footer'>
       <div className='footer-icon'>
-        <img src={facebook_icon} alt='' />
-        <img src={instagram_icon} alt='' />
-        <img src={twitter_icon} alt='' />
-        <img src={youtube_icon} alt='' />
+        {settings && settings.data && (
+          <>
+            {
+              settings.data[0].facebook && (
+                <a href={settings.data[0].facebook} target="_blank" rel="noopener noreferrer">
+                  <img src={facebook_icon} alt='' />
+                </a>
+              )
+            }
+            {
+              settings.data[0].instagram && (
+                <a href={settings.data[0].instagram} target="_blank" rel="noopener noreferrer">
+                  < img src={instagram_icon} alt='' />
+                </a>
+              )
+            }
+            {
+              settings.data[0].twitter && (
+                <a href={settings.data[0].twitter} target="_blank" rel="noopener noreferrer">
+                  <img src={twitter_icon} alt='' />
+                </a>
+              )
+            }
+            {
+              settings.data[0].linkedIn && (
+                <a href={settings.data[0].linkedIn} target="_blank" rel="noopener noreferrer">
+                  <img src={youtube_icon} alt='' />
+                </a>
+              )
+            }
+          </>
+        )}
       </div>
       <ul>
         <li>Audio Description</li>
