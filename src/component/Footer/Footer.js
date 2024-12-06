@@ -14,29 +14,29 @@ const Footer = ({ settings }) => {
         {settings && settings.data && (
           <>
             {
-              settings.data[0].facebook && (
-                <a href={settings.data[0].facebook} target="_blank" rel="noopener noreferrer">
+              settings.data.facebook && (
+                <a href={settings.data.facebook} target="_blank" rel="noopener noreferrer">
                   <img src={facebook_icon} alt='' />
                 </a>
               )
             }
             {
-              settings.data[0].instagram && (
-                <a href={settings.data[0].instagram} target="_blank" rel="noopener noreferrer">
+              settings.data.instagram && (
+                <a href={settings.data.instagram} target="_blank" rel="noopener noreferrer">
                   < img src={instagram_icon} alt='' />
                 </a>
               )
             }
             {
-              settings.data[0].twitter && (
-                <a href={settings.data[0].twitter} target="_blank" rel="noopener noreferrer">
+              settings.data.twitter && (
+                <a href={settings.data.twitter} target="_blank" rel="noopener noreferrer">
                   <img src={twitter_icon} alt='' />
                 </a>
               )
             }
             {
-              settings.data[0].linkedIn && (
-                <a href={settings.data[0].linkedIn} target="_blank" rel="noopener noreferrer">
+              settings.data.linkedIn && (
+                <a href={settings.data.linkedIn} target="_blank" rel="noopener noreferrer">
                   <img src={youtube_icon} alt='' />
                 </a>
               )

@@ -3,7 +3,7 @@ import './Profile.css'
 import 'reactjs-popup'
 import Popup from "reactjs-popup";
 import profile_img from '../../assets/profile_img.png'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Alert } from 'react-bootstrap'
 import { RiCloseFill } from "react-icons/ri";
@@ -14,35 +14,121 @@ const Profile = ({ settings }) => {
 
     const [user, setUser] = useState(null);
     const [file, setFile] = useState(null);
-    const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
     const [alert, setAlert] = useState(null);
     const [error, setError] = useState({});
+    const [imageUrl, setImageUrl] = useState("");
+
     const [changePassword, setChangepassword] = useState({
         password: '',
         confirmPassword: '',
         token: ''
+    })
+    const [updateprofile, setUpdateprofile] = useState({
+        fullName: '',
+        email: '',
+        token: '',
+        image: ''
     })
 
     useEffect(() => {
         const userdata = JSON.parse(localStorage.getItem("user"));
         if (userdata) {
             setUser(userdata);
-            setEmail(userdata.email);
-            setName(userdata.fullName);
-        }
-    }, [])
+            setUpdateprofile({
+                fullName: userdata.fullName,
+                email: userdata.email,
+                image: userdata.image
+            })
+            setImageUrl(userdata.image);
+        };
 
+    }, []);
 
+    const navigate = useNavigate();
     const token = localStorage.getItem("token");
     if (!token) {
         console.log("please log in");
         return;
     }
 
-    const payload = {
-        password: changePassword.password,
-        confirmPassword: changePassword.confirmPassword,
+    const handleedit = (e) => {
+        const { name, value } = e.target;
+        setUpdateprofile({
+            ...updateprofile, [name]: value
+        })
+    }
+    const editprofile = (e) => {
+        e.preventDefault();
+
+        const validation = {}
+
+        if (updateprofile.fullName === "") {
+            validation.fullName = "Enter the fullName"
+        }
+        if (updateprofile.email === "") {
+            validation.email = "Enter the email"
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(updateprofile.email)) {
+            validation.email = "Email is not valid"
+        }
+        setError(validation);
+
+        if (Object.keys(validation).length === 0) {
+            const formdata = new FormData();
+
+            if (file) {
+                formdata.append('image', file);
+            }
+            formdata.append('fullName', updateprofile.fullName);
+            formdata.append('email', updateprofile.email);
+
+            axios.post(`${process.env.REACT_APP_BASE_URL}/editProfile`, formdata,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                .then(res => {
+                    if (res.data.status) {
+
+                        const updateuser = {
+                            email: res.data.user.email,
+                            fullName: res.data.user.fullName,
+                            image: res.data.user.image
+                        };
+                        console.log(updateprofile);
+                        setImageUrl(res.data.user.image);
+                        localStorage.setItem("user", JSON.stringify(updateuser));
+
+                        setAlert({
+                            message: res.data.message,
+                            variant: "success"
+                        })
+                    } else {
+                        console.error("profile failed")
+                        setAlert({
+                            message: res.data.message,
+                            variant: "danger"
+                        })
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+    }
+
+    const fileUpload = (e) => {
+        const upload = e.target.files[0];
+        if (upload) {
+            debugger
+            setFile(upload);
+
+            let value = URL.createObjectURL(upload);
+            setImageUrl(value);
+
+        } else {
+            setFile(null)
+        }
     }
 
     const handlesubmit = (e) => {
@@ -65,7 +151,7 @@ const Profile = ({ settings }) => {
         setError(validation);
         if (Object.keys(validation).length === 0) {
 
-            axios.post(`${process.env.REACT_APP_BASE_URL}/changePassword`, payload,
+            axios.post(`${process.env.REACT_APP_BASE_URL}/changePassword`, changePassword,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -100,82 +186,84 @@ const Profile = ({ settings }) => {
             ...changePassword, [name]: value
         })
     }
-    const fileUpload = (e) => {
-        const upload = e.target.files[0];
-        if (upload) {
-            setFile(URL.createObjectURL(upload))
-        }
-    }
-    const changename = (e) => {
-        setName(e.target.value);
-    }
-    const changeemail = (e) => {
-        setEmail(e.target.value);
-    }
+
     const handleclose = () => {
         setAlert(null);
     }
-
+    const netflixhome = () => {
+        navigate("/");
+    }
+    const handlesignout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        navigate("/login");
+    }
     return (
         <div className="profile-page">
-            {settings && settings.data && settings.data[0].logo &&
+            {settings && settings.data &&
                 (
-                    <img src={settings.data[0].logo} alt="" className="profile-logo" />
+                    <img src={settings.data.logo} alt="" className="profile-logo" onClick={netflixhome} />
                 )
             }
             <div className="profile-form">
                 <h1>Profile</h1>
-                <form>
+                <form onSubmit={editprofile}>
+                    {alert && (
+                        <Alert variant={alert.variant} className="profile-alert">
+                            {alert.message}
+                            <RiCloseFill className='close-icon-profile' onClick={handleclose} />
+                        </Alert>
+                    )}
                     <ul>
                         <li>
                             <label>Profile :</label>
                             <div>
                                 {
-                                    file ?
-                                        (
-                                            <img src={file} alt="upload" className="profile-img" />
-                                        ) :
-                                        (
-                                            <img src={profile_img}
-                                                alt="default-img"
-                                                className="profile-img"
-                                            />
-                                        )
+                                    imageUrl ?
+                                        <img src={imageUrl} alt="upload" className="profile-img" />
+                                        :
+                                        <img src={profile_img} alt="default-img" className="profile-img" />
                                 }
                                 <br />
-                                <input type="file" onChange={fileUpload} />
+                                <input type="file" onChange={fileUpload} name="image" />
                             </div>
                         </li>
                         {user && (
                             <div>
                                 <li>
                                     <label>FullName : </label>
-                                    <input type="text" placeholder="Enter your Name" className="profile-input" value={name} onChange={changename} />
+                                    <input type="text" placeholder="Enter your Name" className="profile-input" name="fullName" value={updateprofile.fullName} onChange={handleedit} />
+                                    {error.fullName && <p className="error"><small>{error.fullName}</small></p>}
+
                                 </li>
                                 <li>
                                     <label>Email : </label>
-                                    <input type="text" placeholder="Enter your Name" className="profile-input" value={email} onChange={changeemail} />
+                                    <input type="text" placeholder="Enter your Email" className="profile-input" name="email" value={updateprofile.email} onChange={handleedit} />
+                                    {error.email && <p className="error"><small>{error.email}</small></p>}
                                 </li>
-                                <button className="updateprofile" type="button">Update Profile</button>
+                                <button className="updateprofile" type="submit">Update Profile</button>
                             </div>
                         )}
                     </ul>
                     <Popup trigger=
-                        {<Link className="changepassowrd ">Change Password ?</Link>}
+                        {<Link className="changepassowrd">Change Password ?</Link>}
                         modal nested>
                         {
-                            close => (
+                            (close) => (
 
                                 <div className='resetpassword-form'>
+                                    <div className="area">
+                                        <RiCloseFill className='close-icon' onClick={() => { setAlert(null); close() }} />
+                                    </div>
                                     <form onSubmit={(e) => {
                                         e.preventDefault();
                                     }}>
 
-                                        <h1>Reset password</h1>
+                                        <h1>Change Password</h1>
                                         {alert && (
                                             <Alert variant={alert.variant} className={`${alert.variant}`}>
                                                 {alert.message}
-                                                <RiCloseFill className='close-icon' onClick={handleclose} />
+                                                <RiCloseFill className='close-icon1' onClick={handleclose} />
                                             </Alert>
                                         )}
 
@@ -187,14 +275,16 @@ const Profile = ({ settings }) => {
                                         {error.confirmPassword &&
                                             <p className="error2"><small>{error.confirmPassword}</small></p>
                                         }
-                                        <button type="submit" onClick={handlesubmit}>Reset Password</button>
-                                        <button type="button" onClick={() => { setAlert(null); close() }}>cancel</button>
+                                        <button type="submit" onClick={handlesubmit}>Change Password</button>
+                                        <button type="button" onClick={() => { setAlert(null); close() }}>Close</button>
                                     </form>
                                 </div>
                             )
                         }
                     </Popup>
                 </form>
+                <Link to="/login" className="changepassowrd" onClick={handlesignout}>SignOut ?</Link>
+
             </div>
         </div >
     )

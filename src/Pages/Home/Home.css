@@ -1,3 +1,15 @@
+.Home {
+    overflow: auto;
+    /* Allow scrolling */
+    scrollbar-width: none;
+    /* For Firefox */
+}
+
+.Home::-webkit-scrollbar {
+    display: none;
+    /* For Chrome, Safari, and Edge */
+}
+
 .hero {
     position: relative;
 }
@@ -73,9 +85,6 @@
     background: #6d6d6e66;
 }
 
-.more-card {
-    padding-left: 6%;
-}
 
 @media (max-width: 1024px) {
     .hero-caption .title-cards {
@@ -125,4 +134,58 @@
         gap: 5px;
         font-size: 10px;
     }
+}
+
+.title-cards {
+    margin-top: 39px;
+    margin-bottom: 14px;
+}
+
+.title-cards h2 {
+    margin-bottom: 8px;
+}
+
+.card-list {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.card-list::-webkit-scrollbar {
+    display: none;
+}
+
+.card-list img {
+    width: 240px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.card-list .card p {
+    text-decoration: none;
+    color: #fff;
+}
+
+@media (max-width: 800px) {
+    .title-cards {
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+
+    .title-cards h2 {
+        font-size: 15px;
+    }
+
+    .card-list img {
+        width: 165px;
+    }
+
+    .card-list p {
+        font-size: 10px;
+    }
+}
+
+.title-card-section {
+    padding-left: 93px;
+    margin-bottom: -18px;
 }

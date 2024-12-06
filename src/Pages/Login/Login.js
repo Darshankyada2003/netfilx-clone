@@ -128,9 +128,9 @@ const Login = ({ settings }) => {
     </div> :
       <div className='login'>
         {
-          settings && settings.data && settings.data[0].logo &&
+          settings && settings.data &&
           (
-            <img src={settings.data[0].logo} alt='' className='login-logo' onClick={netflixhome} />
+            <img src={settings.data.logo} alt='' className='login-logo' onClick={netflixhome} />
           )
         }
         <div className='login-form'>
@@ -138,7 +138,7 @@ const Login = ({ settings }) => {
           {alert && (
             <Alert variant={alert.variant} className={`${alert.variant}`}>
               {alert.message}
-              <RiCloseFill className='close-icon' onClick={handleclose} />
+              <RiCloseFill className='close-icon3' onClick={handleclose} />
             </Alert>
           )}
           <form onSubmit={handlesubmit}>

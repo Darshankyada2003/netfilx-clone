@@ -43,10 +43,11 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    background-color: #dcf6ff40;
+    color: white;
 }
 
 .profile-input:focus {
-    border-color: #007bff;
     outline: none;
     box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
 }
@@ -113,6 +114,8 @@
     font-size: 24px;
     margin-bottom: 20px;
     color: #fdfdfd;
+    justify-content: start;
+    display: flex;
     /* Text color */
 }
 
@@ -164,7 +167,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 19px;
+    padding: 10px;
     margin: 40px 0;
     border-radius: 5px;
     font-size: 16px;
@@ -196,4 +199,48 @@
     margin: 2px;
     position: relative;
     left: -100px;
+}
+
+.close-icon1 {
+    margin: 10px;
+    left: 45%;
+    top: 70%;
+    font-size: 22px;
+}
+
+.close-icon {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
+    margin-right: 10px;
+    font-size: 33px;
+    left: 44%;
+    top: 99px;
+}
+
+.area {
+    width: 70%;
+    height: 100px;
+}
+
+.profile-form .error {
+    color: red;
+    margin: 1px;
+    left: -116px;
+}
+
+.profile-alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    max-width: 500px;
+    border: 1px solid #f5c6cb;
+    transition: opacity 0.3s ease;
+    background-color: #d4edda;
+    color: #155724;
 }

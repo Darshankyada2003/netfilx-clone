@@ -50,7 +50,7 @@ const Navbar = ({ settings }) => {
     return (    
         <div className='navbar' ref={navRef}>
             <div className='navbar-left'>
-                {settings && settings.data && settings.data[0].logo && (<img src={settings.data[0].logo} alt='' />)}
+                {settings && settings.data && (<img src={settings.data.logo} alt='' />)}
                 <ul>
                     <li>Home</li>
                     <li>TV Show</li>
