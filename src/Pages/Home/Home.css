@@ -34,7 +34,7 @@
     position: absolute;
     width: 100%;
     padding-left: 6%;
-    bottom: 0;
+    bottom: 160px;
 }
 
 .caption-img {
@@ -188,4 +188,23 @@
 .title-card-section {
     padding-left: 93px;
     margin-bottom: -18px;
+}
+
+.caption-row {
+    display: flex;
+    flex-direction: row;
+    /* Align items in a row */
+    gap: 15px;
+    /* Space between items */
+    align-items: center;
+    /* Align items vertically in the center */
+}
+
+.caption-item {
+    margin: 0;
+    /* Remove default margin */
+    font-size: 16px;
+    /* Adjust font size */
+    line-height: 1.5;
+    /* Adjust line height */
 }
