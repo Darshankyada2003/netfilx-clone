@@ -1,0 +1,104 @@
+/* subscription.css */
+
+.subscription {
+    padding: 20px;
+    background-color: #000000;
+    min-height: 100vh;
+}
+
+.logo_1 {
+    width: 150px;
+    cursor: pointer;
+    position: relative;
+    left: 57px;
+    top: 30px;
+}
+
+.plan p {
+    font-size: medium;
+    display: flex;
+    justify-content: center;
+}
+
+.plan {
+    background-color: rgb(0, 0, 0);
+    padding: 41px;
+    max-width: 379px;
+    margin: 0 auto;
+    bottom: -88px;
+    position: relative;
+}
+
+.plan h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.plan ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.plan ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.plan ul li::before {
+    content: '✔';
+    margin-right: 10px;
+    color: #fc0909;
+    /* Green check mark */
+}
+
+.plan ul li:last-child {
+    margin-bottom: 0;
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+    .plan {
+        padding: 49px;
+    }
+
+    .plan h2 {
+        font-size: 30px;
+    }
+
+    .plan ul li {
+        font-size: 16px;
+    }
+}
+
+.subscriptionbtn {
+    display: inline-block;
+    padding: 19px 152px;
+    font-size: 20px;
+    color: #fff;
+    background-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid #7d232e;
+    right: 20px;
+    position: relative;
+}
+
+.subscriptionbtn:hover {
+    background-color: hsl(0, 89%, 34%);
+}
+
+.subscriptionbtn:active {
+    transform: scale(0.95);
+}
+
+.subscriptionbtn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}

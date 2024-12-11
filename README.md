@@ -82,3 +82,5 @@ axios: npm install axios
 
 popup  : npm i reactjs-popup
 
+icon : npm i react-icons
+

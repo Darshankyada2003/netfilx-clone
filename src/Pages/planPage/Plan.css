@@ -1,0 +1,148 @@
+/* .Plan_Subscription {
+    padding: 20px;
+    background-color: #000000;
+    min-height: 100vh;
+} */
+
+.Plan_Subscription {
+    overflow: auto;
+    /* Allow scrolling */
+    scrollbar-width: none;
+    /* For Firefox */
+}
+
+.Plan_Subscription::-webkit-scrollbar {
+    display: none;
+    /* For Chrome, Safari, and Edge */
+}
+
+.logo_2 {
+    width: 150px;
+    cursor: pointer;
+    position: relative;
+    left: 20px;
+    top: 20px;
+}
+
+.sub_plan {
+    width: 100%;
+    max-width: 450px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    padding: 60px;
+    margin: auto;
+}
+
+.heading {
+    top: 56px;
+    position: relative;
+    left: 90px;
+}
+
+.heading h2 {
+    text-decoration: none;
+}
+
+.Plans_details {
+    display: flex;
+    gap: 84px;
+    justify-content: center;
+    flex-wrap: wrap;
+    top: 79px;
+    position: relative;
+}
+
+.plan-card {
+    background: #000000;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 250px;
+    padding: 20px;
+    text-align: left;
+    border: 1px solid #e0e0e0;
+}
+
+.plan-header {
+    background: linear-gradient(135deg, #007aff, #0055d4);
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+    padding: 10px;
+    text-align: center;
+}
+
+.plan-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.plan-header p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+}
+
+.plan-details p {
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+.popular {
+    border: 2px solid #6200ea;
+    transform: scale(1.05);
+}
+
+.popular .plan-header {
+    background: linear-gradient(135deg, #6200ea, #3a0088);
+}
+
+.premium .plan-header {
+    background: linear-gradient(135deg, #ff5e57, #c81d25);
+}
+
+.plan-card.mobile strong {
+    color: #007aff;
+    /* Blue for "Mobile" */
+}
+
+.plan-card.popular strong {
+    color: #6200ea;
+    /* Purple for "Basic" (Most Popular) */
+}
+
+.plan-card.standard strong {
+    color: #007aff;
+    /* Green for "Standard" */
+}
+
+.plan-card.premium strong {
+    color: #ff5e57;
+    /* Red for "Premium" */
+}
+
+.paynowbtn {
+    display: inline-block;
+    padding: 19px 152px;
+    font-size: 20px;
+    color: #fff;
+    background-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid #7d232e;
+    right: 20px;
+    position: relative;
+}
+
+.paynowbtn:hover {
+    background-color: hsl(0, 89%, 34%);
+}
+
+.paynowbtn:active {
+    transform: scale(0.95);
+}
+
+.paynowbtn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}

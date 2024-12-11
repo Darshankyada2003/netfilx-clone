@@ -1,30 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './Home.css'
 import Navbar from '../../component/Navbar/Navbar'
-import hero_title from '../../assets/hero_title.png'
 import play_icon from '../../assets/play_icon.png'
 import info_icon from '../../assets/info_icon.png'
 import Footer from '../../component/Footer/Footer'
-import sideshow1 from '../../assets/hero_banner.jpg'
-import sideshow2 from '../../assets/the_wild_robot.jpg'
-import sideshow3 from '../../assets/wp4074461.jpg'
-import sideshow4 from '../../assets/money-heist.jpg'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Home = ({ settings }) => {
-
-    // const sideshowimg = [
-    //     sideshow1,
-    //     sideshow2,
-    //     sideshow3,
-    //     sideshow4
-    // ]
 
     const [current, setCurrent] = useState(0);
     const [fade, setFade] = useState(false);
     const [category, setCategory] = useState([]);
     const [sliderImage, setSliderImage] = useState([]);
+    const navigate = useNavigate();
 
+    //Sliderimg 
     useEffect(() => {
         setFade(true);
         const interval = setInterval(() => {
@@ -37,6 +28,7 @@ const Home = ({ settings }) => {
         return () => clearInterval(interval);
     }, [sliderImage.length]);
 
+    //Home GetApt
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/home`)
             .then(res => {
@@ -50,8 +42,13 @@ const Home = ({ settings }) => {
             })
     }, []);
 
-    const movieRef = useRef([]);
+    //redirect to movie detail
+    const handleclick = (movieID) => {
+        navigate(`/movie/${movieID}`)
+    }
 
+    //Movie scroll horizontal 
+    const movieRef = useRef([]);
     useEffect(() => {
         const handleWheel = (e, index) => {
             e.preventDefault();
@@ -75,6 +72,7 @@ const Home = ({ settings }) => {
         };
     }, [category])
 
+    //TopImage getApi
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/topImages`)
             .then(res => {
@@ -88,6 +86,11 @@ const Home = ({ settings }) => {
 
             });
     }, [])
+
+    //navigate to subscribeToWatch
+    const subscribeToWatch = () => {
+        navigate("/subscription")
+    }
 
     return (
         <div className='Home'>
@@ -112,8 +115,8 @@ const Home = ({ settings }) => {
                                     <div className='hero-caption'>
                                         <h2 className={`caption-img ${fade ? 'fade' : 'fade-out'}`}>{item.title}</h2>
                                         <div className={`caption-row ${fade ? 'fade' : 'fade-out'}`}>
-                                            <p className={`caption-item ${fade ? 'fade' : 'fade-out'}`}>{item.release_date}</p>
-                                            <p className={`caption-item ${fade ? 'fade' : 'fade-out'}`}>{item.language}</p>
+                                            <p className={`caption-item ${fade ? 'fade' : 'fade-out'}`}>{item.release_date}</p>|
+                                            <p className={`caption-item ${fade ? 'fade' : 'fade-out'}`}>{item.language}</p>|
                                             <p className={`caption-item ${fade ? 'fade' : 'fade-out'}`}>{item.duration}</p>
                                         </div>
                                         <br />
@@ -122,7 +125,7 @@ const Home = ({ settings }) => {
                                         <br />
                                         <div className='hero-btn'>
                                             {item.isPlay && (
-                                                <button className='btn'><img src={play_icon} alt='' />Play</button>
+                                                <button className='btn' onClick={subscribeToWatch}><img src={play_icon} alt='' />Subscribe to Watch</button>
                                             )}
                                             {item.isMoreInfo && (<button className='btn dark-btn'><img src={info_icon} alt='' />More Info</button>)}
                                         </div>
@@ -143,7 +146,8 @@ const Home = ({ settings }) => {
                             <div className='card-list' ref={(el) => movieRef.current[index] = el}>
                                 {category.movies.length > 0 &&
                                     category.movies.map((movie) => (
-                                        <div key={movie.id} >
+                                        <div key={movie.id}
+                                            onClick={() => handleclick(movie.id)}>
                                             <img src={movie.backdrop_path} alt='' />
                                             <p>{movie.title}</p>
                                         </div>

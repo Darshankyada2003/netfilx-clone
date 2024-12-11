@@ -7,6 +7,9 @@ import Forgot from './Pages/Forgotpassword/Forgotpassword'
 import Reset from './Pages/Resetpassword/Resetpassword'
 import axios from 'axios'
 import Profile from './Pages/Profile/Profile'
+import Detail from './Pages/DetailPage/Detail'
+import Subscription from './Pages/Subscription/Subscription'
+import Plan from './Pages/planPage/Plan'
 
 const App = () => {
 
@@ -26,7 +29,7 @@ const App = () => {
 
   return (
     <div>
-      
+
       <Routes>
         <Route path='/' element={<Home settings={settings} />} />
         <Route path='/login' element={<Login settings={settings} />} />
@@ -34,6 +37,9 @@ const App = () => {
         <Route path='/forgot' element={<Forgot settings={settings} />} />
         <Route path='/resetpassword' element={<Reset settings={settings} />} />
         <Route path='/profile' element={<Profile settings={settings} />} />
+        <Route path='/movie/:id' element={<Detail settings={settings} />} />
+        <Route path='/subscription' element={<Subscription settings={settings} />} />
+        <Route path='/plan' element={<Plan settings={settings} />} />
       </Routes>
     </div>
   )

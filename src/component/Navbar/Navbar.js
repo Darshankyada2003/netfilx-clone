@@ -47,17 +47,23 @@ const Navbar = ({ settings }) => {
     const profilepage = () => {
         navigate("/profile");
     }
+    const subscribe = () => {
+        navigate("/subscription")
+    }
+    const home = () => {
+        navigate("/")
+    }
     return (    
         <div className='navbar' ref={navRef}>
             <div className='navbar-left'>
                 {settings && settings.data && (<img src={settings.data.logo} alt='' />)}
                 <ul>
-                    <li>Home</li>
+                    <li onClick={home}>Home</li>
                     <li>TV Show</li>
                     <li>Movies</li>
                     <li>New & Popular</li>
                     <li>My List</li>
-                    <li>Browse by Languages</li>
+                    <li onClick={subscribe}>Subscribe to Watch</li>
                 </ul>
             </div>
             <div className='navbar-right' >
