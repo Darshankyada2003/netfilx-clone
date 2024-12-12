@@ -53,10 +53,13 @@ const Navbar = ({ settings }) => {
     const home = () => {
         navigate("/")
     }
+    const NavigateToHome = () => {
+        navigate("/")
+    }
     return (    
         <div className='navbar' ref={navRef}>
             <div className='navbar-left'>
-                {settings && settings.data && (<img src={settings.data.logo} alt='' />)}
+                {settings && settings.data && (<img src={settings.data.logo} alt='' onClick={NavigateToHome} />)}
                 <ul>
                     <li onClick={home}>Home</li>
                     <li>TV Show</li>

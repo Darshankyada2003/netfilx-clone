@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './Home.css'
 import Navbar from '../../component/Navbar/Navbar'
-import play_icon from '../../assets/play_icon.png'
+import play_icon from '../../assets/Screenshot 2024-12-11 151031.png'
 import info_icon from '../../assets/info_icon.png'
 import Footer from '../../component/Footer/Footer'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { IoIosPlay } from "react-icons/io";
 
 const Home = ({ settings }) => {
 
@@ -125,7 +126,7 @@ const Home = ({ settings }) => {
                                         <br />
                                         <div className='hero-btn'>
                                             {item.isPlay && (
-                                                <button className='btn' onClick={subscribeToWatch}><img src={play_icon} alt='' />Subscribe to Watch</button>
+                                                <button className='btn' onClick={subscribeToWatch}><IoIosPlay className='play_icon' />Subscribe to Watch</button>
                                             )}
                                             {item.isMoreInfo && (<button className='btn dark-btn'><img src={info_icon} alt='' />More Info</button>)}
                                         </div>
@@ -148,7 +149,7 @@ const Home = ({ settings }) => {
                                     category.movies.map((movie) => (
                                         <div key={movie.id}
                                             onClick={() => handleclick(movie.id)}>
-                                            <img src={movie.backdrop_path} alt='' />
+                                            <img src={movie.backdrop_path} alt='' className='listimg' />
                                             <p>{movie.title}</p>
                                         </div>
                                     ))}
