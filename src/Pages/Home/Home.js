@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './Home.css'
 import Navbar from '../../component/Navbar/Navbar'
-import play_icon from '../../assets/Screenshot 2024-12-11 151031.png'
 import info_icon from '../../assets/info_icon.png'
 import Footer from '../../component/Footer/Footer'
 import axios from 'axios'

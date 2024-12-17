@@ -35,10 +35,12 @@
     text-decoration: none;
 }
 
-.plan-container {
+.Plans_details {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+    padding: 1rem;
 }
 
 .plan-card {
@@ -49,25 +51,80 @@
     padding: 1.5rem;
     max-width: 300px;
     text-align: center;
+    flex: 1 1 calc(33.333% - 2rem);
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.plan-card.most-popular {
-    border-color: #800080; /* Highlight color for "Most Popular" */
-    background-color: #200020;
+.plan-card:hover {
+    transform: scale(1.05);
 }
 
-.plan-card h2 {
-    margin-bottom: 1rem;
+.plan-header {
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+    padding: 10px;
+    text-align: center;
 }
 
-.plan-card p {
-    margin: 0.5rem 0;
+.plan-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.plan-header p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+}
+
+.plan-details p {
+    margin: 16px 0px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: start;
+}
+
+.plan-header.most-popular {
+    background: linear-gradient(135deg, #6200ea, #3a0088);
+}
+
+.plan-header.Premium {
+    background: linear-gradient(135deg, #ff5e57, #c81d25);
+}
+
+.plan-header.popular {
+    background: linear-gradient(135deg, #007aff, #0055d4);
+}
+
+.plan-header.mobile {
+    background: linear-gradient(135deg, #007aff, #0055d4);
+}
+
+.plan-card.mobile strong {
+    color: #007aff;
+    /* Blue for "Mobile" */
+}
+
+.plan-card.popular strong {
+    color: #007aff;
+    /* Purple for "Basic" (Most Popular) */
+}
+
+.plan-card.most-popular strong {
+    color: #6200ea;
+    /* Green for "Standard" */
+}
+
+.plan-card.Premium strong {
+    color: #ff5e57;
+    /* Red for "Premium" */
 }
 
 .paynowbtn {
     display: inline-block;
-    padding: 19px 152px;
-    font-size: 20px;
+    padding: 15px 130px;
+    font-size: 1rem;
     color: #fff;
     background-color: transparent;
     border-radius: 5px;
@@ -76,11 +133,75 @@
     text-decoration: none;
     transition: all 0.3s ease;
     border: 2px solid #7d232e;
-    right: -585px;
+    margin: 3rem auto;
     position: relative;
-    top: 116px;
-    margin-bottom: 110px;
+    left: 670px;
+}
 
+.paynowbtn.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .plan-card {
+        flex: 1 1 calc(50% - 2rem);
+        /* Adjust for medium screens */
+    }
+
+    .plan-card h2 {
+        font-size: 1.3rem;
+    }
+
+    .plan-card p {
+        font-size: 0.9rem;
+    }
+
+    .paynowbtn {
+        padding: 12px 40px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .plan-card {
+        flex: 1 1 calc(100% - 2rem);
+        /* Adjust for smaller screens */
+    }
+
+    .plan-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .plan-card p {
+        font-size: 0.85rem;
+    }
+
+    .paynowbtn {
+        padding: 10px 30px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .plan-card {
+        padding: 1rem;
+    }
+
+    .plan-card h2 {
+        font-size: 1rem;
+    }
+
+    .plan-card p {
+        font-size: 0.8rem;
+    }
+
+    .paynowbtn {
+        padding: 8px 20px;
+        font-size: 0.75rem;
+        left: 144px;
+    }
 }
 
 .paynowbtn:hover {
