@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 const Plan = ({ settings }) => {
 
     const [plan, setPlan] = useState([]);
-    const [selectedPlan, setSelectedPlan] = useState("");
+    const [selectedPlan, setSelectedPlan] = useState(null);
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/subscriptions`)
@@ -34,6 +34,10 @@ const Plan = ({ settings }) => {
         } else {
             navigate("/login")
         }
+        if(selectedPlan) {
+            console.log("plan id", selectedPlan.id)
+        }
+        console.log("Selected Plan Object:", selectedPlan);
     }
     return (
         <div className='Plan_Subscription'>
@@ -48,9 +52,9 @@ const Plan = ({ settings }) => {
                 <div className='Plans_details'>
                     {plan &&
                         plan.map((item, index) => (
-                            <div key={index} onClick={() => handleselectedplan(item.title)}
+                            <div key={index} onClick={() => handleselectedplan(item)}
                                 className={`plan-card
-                                ${selectedPlan === item.title ? "selected" : ""} 
+                                ${selectedPlan?.title === item.title ? "selected" : ""} 
                                 ${item.title === "Basic" ? "most-popular"
                                         : item.title === "Premium" ? "Premium"
                                             : item.title === "Standard" ? "popular"
@@ -62,11 +66,11 @@ const Plan = ({ settings }) => {
                                         : item.title === "Standard" ? "popular"
                                             : item.title === "Mobile" ? "mobile"
                                                 : ""
-                                    } ${selectedPlan === item.title ? "selected-header" : ""}`}>
+                                    } ${selectedPlan?.title === item.title ? "selected-header" : ""}`}>
 
                                     <h3>{item.title}</h3>
                                     <p>{item.resolution}</p>
-                                    {selectedPlan === item.title && <span>✔ </span>}
+                                    {selectedPlan?.title === item.title && <span>✔ </span>}
                                 </div>
                                 <div className='plan-details'>
                                     <p>Price : <strong>{item.price}</strong></p>
