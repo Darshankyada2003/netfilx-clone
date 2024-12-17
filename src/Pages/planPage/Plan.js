@@ -28,7 +28,12 @@ const Plan = ({ settings }) => {
     }
 
     const handlepaynow = () => {
-        navigate('/login');
+        const token = localStorage.getItem("token");
+        if (token) {
+            navigate("/");
+        } else {
+            navigate("/login")
+        }
     }
     return (
         <div className='Plan_Subscription'>
@@ -39,7 +44,7 @@ const Plan = ({ settings }) => {
                 <p>SETP 2 OF 2</p>
                 <h2>Choose the plan that’s right for you</h2>
             </div>
-            <from>
+            <form>
                 <div className='Plans_details'>
                     {plan &&
                         plan.map((item, index) => (
@@ -75,7 +80,7 @@ const Plan = ({ settings }) => {
                     }
                 </div>
                 <button onClick={handlepaynow} disabled={!selectedPlan} type='button' className='paynowbtn'>Pay Now</button>
-            </from>
+            </form>
             <Footer settings={settings} />
         </div>
 
