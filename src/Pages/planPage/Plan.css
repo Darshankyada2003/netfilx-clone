@@ -138,9 +138,15 @@
     left: 670px;
 }
 
-.paynowbtn.disabled {
+.paynowbtn:disabled {
+    background-color: transparent;
     cursor: not-allowed;
-    pointer-events: none;
+    opacity: 1;
+}
+
+.paynowbtn:disabled:hover {
+    background-color: transparent;
+    color: #fff;
 }
 
 /* Responsive Design */
@@ -210,9 +216,4 @@
 
 .paynowbtn:active {
     transform: scale(0.95);
-}
-
-.paynowbtn:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
 }

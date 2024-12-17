@@ -74,7 +74,7 @@ const Plan = ({ settings }) => {
                         ))
                     }
                 </div>
-                <button onClick={handlepaynow} disabled={!selectedPlan} type='button' className={`paynowbtn ${!selectedPlan ? 'disabled' : ''}`}>Pay Now</button>
+                <button onClick={handlepaynow} disabled={!selectedPlan} type='button' className='paynowbtn'>Pay Now</button>
             </from>
             <Footer settings={settings} />
         </div>
