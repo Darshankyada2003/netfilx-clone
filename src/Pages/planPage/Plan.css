@@ -138,6 +138,14 @@
     left: 670px;
 }
 
+.paynowbtn:hover {
+    background-color: hsl(0, 89%, 34%);
+}
+
+.paynowbtn:active {
+    transform: scale(0.95);
+}
+
 .paynowbtn:disabled {
     background-color: transparent;
     cursor: not-allowed;
@@ -208,12 +216,4 @@
         font-size: 0.75rem;
         left: 144px;
     }
-}
-
-.paynowbtn:hover {
-    background-color: hsl(0, 89%, 34%);
-}
-
-.paynowbtn:active {
-    transform: scale(0.95);
 }

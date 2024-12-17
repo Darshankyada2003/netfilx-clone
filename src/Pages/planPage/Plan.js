@@ -3,7 +3,8 @@ import './Plan.css'
 import Navbar from '../../component/Navbar/Navbar'
 import Footer from '../../component/Footer/Footer'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { createRazorPayOrder } from './Payment';
 
 const Plan = ({ settings }) => {
 
@@ -29,12 +30,12 @@ const Plan = ({ settings }) => {
 
     const handlepaynow = () => {
         const token = localStorage.getItem("token");
-        if (token) {
-            navigate("/");
+        if (token && selectedPlan) {
+            createRazorPayOrder(selectedPlan.id, selectedPlan.price);
         } else {
             navigate("/login")
         }
-        if(selectedPlan) {
+        if (selectedPlan) {
             console.log("plan id", selectedPlan.id)
         }
         console.log("Selected Plan Object:", selectedPlan);
