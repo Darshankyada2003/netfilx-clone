@@ -43,22 +43,35 @@
     padding: 1rem;
 }
 
+.highlight {
+    color: #ff5722;
+    /* Highlight color */
+    font-weight: bold;
+    font-size: 1.2em;
+    /* Slightly larger font size */
+}
+
 .plan-card {
     background-color: #000;
     color: #fff;
     border: 1px solid #444;
-    border-radius: 8px;
+    border-radius: 7px;
     padding: 1.5rem;
     max-width: 300px;
-    text-align: center;
-    flex: 1 1 calc(33.333% - 2rem);
+    flex-basis: calc(33.333% - 2rem);
     box-sizing: border-box;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .plan-card:hover {
     transform: scale(1.05);
+}
+
+.plan-card.selected {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    /* Optional stronger shadow effect */
 }
 
 .plan-header {
@@ -85,6 +98,23 @@
     align-items: start;
 }
 
+
+.plan-card.selected.most-popular {
+    border-color: #6200ea;
+}
+
+.plan-card.selected.Premium {
+    border-color: #ff5e57;
+}
+
+.plan-card.selected.popular {
+    border-color: #007aff;
+}
+
+.plan-card.selected.mobile {
+    border-color: #007aff;
+}
+
 .plan-header.most-popular {
     background: linear-gradient(135deg, #6200ea, #3a0088);
 }
@@ -103,21 +133,25 @@
 
 .plan-card.mobile strong {
     color: #007aff;
+    margin-left: 6px;
     /* Blue for "Mobile" */
 }
 
 .plan-card.popular strong {
     color: #007aff;
+    margin-left: 6px;
     /* Purple for "Basic" (Most Popular) */
 }
 
 .plan-card.most-popular strong {
     color: #6200ea;
+    margin-left: 6px;
     /* Green for "Standard" */
 }
 
 .plan-card.Premium strong {
     color: #ff5e57;
+    margin-left: 6px;
     /* Red for "Premium" */
 }
 

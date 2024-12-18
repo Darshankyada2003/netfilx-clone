@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import './Detail.css'
 import Footer from "../../component/Footer/Footer";
 import Navbar from "../../component/Navbar/Navbar";
+import Rating from "react-rating";
 
 const Detail = ({ settings }) => {
 
@@ -21,20 +22,27 @@ const Detail = ({ settings }) => {
                 console.log("error for fetch movie id", err)
             })
     }, [id])
+
+    const NumberFormat = (num) => {
+        if (num >= 1000000) {
+            return (num / 1000000).toFixed(1) + "M";
+        } else if (num >= 1000) {
+            return (num / 1000).toFixed(1) + "K";
+        } else {
+            return num.toString();
+        }
+    }
     return (
+
 
         <div className="details">
             <Navbar settings={settings} />
-            {/* {settings && settings.data && (
-                <img src={settings.data.logo} alt="" className="netflix-logo" />
-            )} */}
             <br />
             <br />
             <br />
             {movie && (
                 <div className="movie_detail">
                     <div className="imgORtitle">
-
                         <img src={movie.backdrop_path} alt="" className="movieimg" />
                     </div>
                     <div className="movie-details">
@@ -50,13 +58,21 @@ const Detail = ({ settings }) => {
                             Language: <span>{movie.original_language}</span>
                         </p>
                         <p className="movie-info">
-                            Rating: <span>{movie.vote_average}</span>
+                            Rating:
+                            <span className="star-rating">
+                                <Rating
+                                    initialRating={movie.vote_average / 2}
+                                    readonly
+                                    emptySymbol={<span className="empty-symbol">☆</span>}
+                                    fullSymbol={<span className="full-symbol">★</span>}
+                                />
+                            </span>
                         </p>
                         <p className="movie-info">
-                            Review: <span>{movie.vote_count}</span>
+                            Review:
+                            {NumberFormat(movie.vote_count)}
                         </p>
                     </div>
-
                 </div>
             )}
             <Footer settings={settings} />

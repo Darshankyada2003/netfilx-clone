@@ -84,3 +84,6 @@ popup  : npm i reactjs-popup
 
 icon : npm i react-icons
 
+rating library : npm i react-rating
+
+Reviews convert K / M :  npm install react-number-format

@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Alert } from 'react-bootstrap'
 import { RiCloseFill } from "react-icons/ri";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
 
 
@@ -16,7 +17,9 @@ const Profile = ({ settings }) => {
     const [file, setFile] = useState(null);
     const [alert, setAlert] = useState(null);
     const [error, setError] = useState({});
-    const [imageUrl, setImageUrl] = useState("");
+    const [imageUrl, setImageUrl] = useState(profile_img);
+    const [eye, setEye] = useState(false);
+    const [eyeConfirm, SetEyeConfirm] = useState(false);
 
     const [changePassword, setChangepassword] = useState({
         password: '',
@@ -39,7 +42,7 @@ const Profile = ({ settings }) => {
                 email: userdata.email,
                 image: userdata.image
             })
-            setImageUrl(userdata.image);
+            setImageUrl(userdata.image || profile_img);
         };
 
     }, []);
@@ -57,6 +60,13 @@ const Profile = ({ settings }) => {
             ...updateprofile, [name]: value
         })
     }
+    const handleeye = () => {
+        setEye(!eye);
+    }
+    const handleeyeConfirm = () => {
+        SetEyeConfirm(!eyeConfirm);
+    }
+
     const editprofile = (e) => {
         e.preventDefault();
 
@@ -93,7 +103,7 @@ const Profile = ({ settings }) => {
                         const updateuser = {
                             email: res.data.user.email,
                             fullName: res.data.user.fullName,
-                            image: res.data.user.image
+                            image: res.data.user.image || profile_img
                         };
                         console.log(updateprofile);
                         setImageUrl(res.data.user.image);
@@ -127,7 +137,9 @@ const Profile = ({ settings }) => {
             setImageUrl(value);
 
         } else {
-            setFile(null)
+            setFile(null);
+            setImageUrl(profile_img);
+            console.log("imageUrl:", imageUrl);
         }
     }
 
@@ -218,20 +230,14 @@ const Profile = ({ settings }) => {
                         <li>
                             <label>Profile :</label>
                             <div>
-                                {
-                                    imageUrl ?
-                                        <img src={imageUrl} alt="upload" className="profile-img" />
-                                        :
-                                        <img src={profile_img} alt="default-img" className="profile-img" />
-                                }
-                                <br />
+                                <img src={imageUrl} alt="Profile" className="profile-img" />                                <br />
                                 <input type="file" onChange={fileUpload} name="image" />
                             </div>
                         </li>
                         {user && (
                             <div>
                                 <li>
-                                    <label>FullName : </label>
+                                    <label>Full Name : </label>
                                     <input type="text" placeholder="Enter your Name" className="profile-input" name="fullName" value={updateprofile.fullName} onChange={handleedit} />
                                     {error.fullName && <p className="error"><small>{error.fullName}</small></p>}
 
@@ -267,11 +273,13 @@ const Profile = ({ settings }) => {
                                             </Alert>
                                         )}
 
-                                        <input type='password' placeholder='Password' name="password" onChange={handlechange} value={changePassword.password} />
+                                        <input type={eye ? "text" : "password"} placeholder='Password' name="password" onChange={handlechange} value={changePassword.password} />
+                                        <span className="eyeicon1" onClick={handleeye}>{eye ? <FaRegEyeSlash /> : <FaRegEye />}</span>
                                         {error.password &&
                                             <p className="error"><small>{error.password}</small></p>
                                         }
-                                        <input type='password' placeholder='Confirm Password' name="confirmPassword" onChange={handlechange} value={changePassword.confirmPassword} />
+                                        <input type={eyeConfirm ? "text" : "password"} placeholder='Confirm Password' name="confirmPassword" onChange={handlechange} value={changePassword.confirmPassword} />
+                                        <span className="eyeicon2" onClick={handleeyeConfirm}>{eyeConfirm ? <FaRegEyeSlash /> : <FaRegEye />}</span>
                                         {error.confirmPassword &&
                                             <p className="error2"><small>{error.confirmPassword}</small></p>
                                         }

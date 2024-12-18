@@ -97,7 +97,8 @@ const Login = ({ settings }) => {
               setAlert({
                 message: res.data.message,
                 variant: "success"
-              })
+              });
+              setSign("Sign In");
             }
           } else {
             setAlert({

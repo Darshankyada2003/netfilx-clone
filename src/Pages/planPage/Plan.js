@@ -11,6 +11,7 @@ const Plan = ({ settings }) => {
     const [plan, setPlan] = useState([]);
     const [selectedPlan, setSelectedPlan] = useState(null);
 
+    //subscription API
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/subscriptions`)
             .then(res => {
@@ -22,12 +23,18 @@ const Plan = ({ settings }) => {
                 console.log("error", err);
             })
     }, []);
+
+    useEffect(() => {
+        document.title = "Netflix-Subscription";
+    }, []);
+
     const navigate = useNavigate();
 
     const handleselectedplan = (title) => {
         setSelectedPlan(title);
     }
 
+    //Paynow to paymentredirect 
     const handlepaynow = () => {
         const token = localStorage.getItem("token");
         if (token && selectedPlan) {
@@ -40,6 +47,7 @@ const Plan = ({ settings }) => {
         }
         console.log("Selected Plan Object:", selectedPlan);
     }
+
     return (
         <div className='Plan_Subscription'>
             <Navbar settings={settings} />
@@ -74,11 +82,11 @@ const Plan = ({ settings }) => {
                                     {selectedPlan?.title === item.title && <span>✔ </span>}
                                 </div>
                                 <div className='plan-details'>
-                                    <p>Price : <strong>{item.price}</strong></p>
-                                    <p>Resolution: <strong>{item.resolution}</strong></p>
-                                    <p>Sound Quality: <strong>{item.sound_quality}</strong></p>
+                                    <p>Price:<strong className='highlight'>₹{item.price}</strong></p>
+                                    <p>Resolution:<strong>{item.resolution}</strong></p>
+                                    <p>Sound Quality:<strong>{item.sound_quality}</strong></p>
                                     <p>Devices:<strong>{item.supported_devices}</strong></p>
-                                    <p>Connection : <strong>{item.connection}</strong></p>
+                                    <p>Connection:<strong>{item.connection}</strong></p>
                                 </div>
                             </div>
                         ))
