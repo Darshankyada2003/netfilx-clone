@@ -86,7 +86,7 @@ const Plan = ({ settings }) => {
                                     <p>Resolution:<strong>{item.resolution}</strong></p>
                                     <p>Sound Quality:<strong>{item.sound_quality}</strong></p>
                                     <p>Devices:<strong>{item.supported_devices}</strong></p>
-                                    <p>Connection:<strong>{item.connection}</strong></p>
+                                    <p>Number of User:<strong>{item.connection}</strong></p>
                                 </div>
                             </div>
                         ))

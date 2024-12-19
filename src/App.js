@@ -42,7 +42,7 @@ const App = () => {
         <Route path='/movie/:id' element={<Detail settings={settings} />} />
         <Route path='/subscription' element={<Subscription settings={settings} />} />
         <Route path='/plan' element={<Plan settings={settings} />} />
-        <Route path='/invoice' element={<Invoice settings={settings} />} />
+        <Route path='/invoice/:id' element={<Invoice settings={settings} />} />
         <Route path='/crud' element={<Crud />} />
       </Routes>
     </div>

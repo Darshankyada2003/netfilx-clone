@@ -69,7 +69,7 @@ const handleRazorpayScreen = async (order_id, amount, SubId) => {
                 }).then(response => response.json())
                     .then(response => {
                         if (response.status) {
-                            window.location.href = "/invoice";
+                            window.location.href = `/invoice/${SubId}`;
                         } else {
                             alert("Payment verification failed. Please try again.");
                         }
@@ -87,3 +87,6 @@ const handleRazorpayScreen = async (order_id, amount, SubId) => {
         console.error("Error initializing Razorpay:", error);
     }
 };
+
+
+
