@@ -107,10 +107,10 @@
         margin-bottom: 20px;
     }
 
-    .hero-caption p {
+    /* .hero-caption p {
         max-width: 100%;
         font-size: 15px;
-    }
+    } */
 
     .hero-btn .btn {
         padding: 6px 16px;
@@ -133,9 +133,9 @@
         margin-bottom: 15px;
     }
 
-    .hero-caption p {
+    /* .hero-caption p {
         font-size: 13px;
-    }
+    } */
 
     .hero-btn .btn {
         padding: 4px 12px;

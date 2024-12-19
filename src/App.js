@@ -11,6 +11,7 @@ import Detail from './Pages/DetailPage/Detail'
 import Subscription from './Pages/Subscription/Subscription'
 import Plan from './Pages/planPage/Plan'
 import Crud from './Pages/crud'
+import Invoice from './Pages/Invoice/Invoice'
 
 const App = () => {
 
@@ -41,6 +42,7 @@ const App = () => {
         <Route path='/movie/:id' element={<Detail settings={settings} />} />
         <Route path='/subscription' element={<Subscription settings={settings} />} />
         <Route path='/plan' element={<Plan settings={settings} />} />
+        <Route path='/invoice' element={<Invoice settings={settings} />} />
         <Route path='/crud' element={<Crud />} />
       </Routes>
     </div>

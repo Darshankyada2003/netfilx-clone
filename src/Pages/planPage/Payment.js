@@ -69,7 +69,7 @@ const handleRazorpayScreen = async (order_id, amount, SubId) => {
                 }).then(response => response.json())
                     .then(response => {
                         if (response.status) {
-                            window.location.href = "/";
+                            window.location.href = "/invoice";
                         } else {
                             alert("Payment verification failed. Please try again.");
                         }

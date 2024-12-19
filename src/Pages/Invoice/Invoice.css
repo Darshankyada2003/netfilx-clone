@@ -1,0 +1,132 @@
+.invoice {
+    height: 100vh;
+    background-image: linear-gradient(#0000007e, #0000007e), url(/public/background_banner.jpg);
+    padding: 20px 8%;
+}
+
+.login-logo {
+    width: 150px;
+    cursor: pointer;
+}
+
+.invoice_form {
+    width: 100%;
+    max-width: 450px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    padding: 60px;
+    margin: auto;
+}
+
+.invoice_form h1 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 28px;
+    justify-content: center;
+    display: flex;
+}
+
+.invoice_navbar {
+    margin-bottom: 100px;
+    right: 120px;
+    position: relative;
+    bottom: 20px;
+}
+
+.invoice_detail {
+    margin-top: 30px;
+    overflow-x: auto;
+}
+
+.invoice_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.invoice_table th,
+.invoice_table td {
+    text-align: left;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.invoice_table th {
+    background-color: #e50914;
+    color: white;
+    font-weight: bold;
+}
+
+.invoice_table tbody tr:hover {
+    background-color: rgba(229, 9, 20, 0.1);
+}
+
+.invoice_table td {
+    color: #333;
+}
+
+.invoice_table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* User Details Section */
+.user_detail {
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    color: #333;
+    text-align: left;
+}
+
+.user_detail h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #e50914;
+}
+
+.user_detail p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+/* Plan Details Section */
+.invoice_detail {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.invoice_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.invoice_table th,
+.invoice_table td {
+    text-align: left;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.invoice_table th {
+    background-color: #e50914;
+    color: white;
+    font-weight: bold;
+}
+
+.invoice_table td {
+    color: #333;
+}
+
+.invoice_table tbody tr:last-child td {
+    border-bottom: none;
+}
