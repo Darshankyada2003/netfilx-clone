@@ -109,7 +109,7 @@ const Invoice = ({ settings }) => {
                             </div>
                             <div class="summary-row">
                                 <p class="summary-label">GST IN:</p>
-                                <p class="summary-value">24DEVPK7543E</p>
+                                <p class="summary-value"></p>
                             </div>
                             <div class="summary-row">
                                 <p class="summary-label">Discount:</p>
