@@ -3,6 +3,7 @@ import "./Invoice.css";
 import Navbar from "../../component/Navbar/Navbar";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { DateTime } from "luxon";
 
 const Invoice = ({ settings }) => {
 
@@ -29,7 +30,8 @@ const Invoice = ({ settings }) => {
 
     const { invoice, subscription } = invoicedata;
     const gst = (invoice?.amount * 18) / 100;
-    const subtotal = (invoice?.amount - gst);
+    const discount = 0.00;
+    const subtotal = (invoice?.amount - gst) - discount;
 
     return (
         <div className="invoice">
@@ -51,7 +53,7 @@ const Invoice = ({ settings }) => {
 
                 <div className="invoice_body">
                     <div className="invoice_info">
-                        <p>Invoice Date: <strong>{invoice?.validFrom}</strong></p>
+                        <p>Invoice Date: <strong>{DateTime.fromISO(invoice?.validFrom).toFormat('MMMM dd, yyyy')}</strong></p>
                         <p>Invoice ID : <strong>#{invoice?.id}</strong></p>
                     </div>
                     <div className="btn-success">
@@ -84,7 +86,7 @@ const Invoice = ({ settings }) => {
                         </div>
                         <div className="subscription_row">
                             <p className="subscription_label">Date :</p>
-                            <p className="subscription_value">{`${invoice?.validFrom} - ${invoice?.validTo}`}</p>
+                            <p className="subscription_value">{`${DateTime.fromISO(invoice?.validFrom).toFormat('MMMM dd, yyyy')} - ${DateTime.fromISO(invoice?.validTo).toFormat('MMMM dd, yyyy')}`}</p>
                         </div>
                         <div className="subscription_row">
                             <p className="subscription_label">Amount :</p>
@@ -106,20 +108,20 @@ const Invoice = ({ settings }) => {
                         </div>
                         <div class="summary-details">
                             <div class="summary-row">
-                                <p class="summary-label">Sub Total:</p>
+                                <p class="summary-label">Sub Total :</p>
                                 <p class="summary-value">₹{subtotal}</p>
                             </div>
                             <div class="summary-row">
-                                <p class="summary-label">GST IN:</p>
-                                <p class="summary-value">{gst}</p>
+                                <p class="summary-label">GST 18% :</p>
+                                <p class="summary-value">₹{gst}</p>
                             </div>
                             <div class="summary-row">
-                                <p class="summary-label">Discount:</p>
-                                <p class="summary-value">₹0.00</p>
+                                <p class="summary-label">Discount :</p>
+                                <p class="summary-value">₹{discount}.00</p>
                             </div>
                             <div class="summary-row total">
-                                <p class="summary-label">Total Amount:</p>
-                                <p class="summary-value">₹{subtotal + gst}</p>
+                                <p class="summary-label">Total Amount :</p>
+                                <p class="summary-value">₹{subtotal + gst}.00</p>
                             </div>
                         </div>
                     </div>
