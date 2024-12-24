@@ -28,6 +28,8 @@ const Invoice = ({ settings }) => {
     }, [id])
 
     const { invoice, subscription } = invoicedata;
+    const gst = (invoice?.amount * 18) / 100;
+    const subtotal = (invoice?.amount - gst);
 
     return (
         <div className="invoice">
@@ -105,11 +107,11 @@ const Invoice = ({ settings }) => {
                         <div class="summary-details">
                             <div class="summary-row">
                                 <p class="summary-label">Sub Total:</p>
-                                <p class="summary-value">₹{invoice?.amount}</p>
+                                <p class="summary-value">₹{subtotal}</p>
                             </div>
                             <div class="summary-row">
                                 <p class="summary-label">GST IN:</p>
-                                <p class="summary-value"></p>
+                                <p class="summary-value">{gst}</p>
                             </div>
                             <div class="summary-row">
                                 <p class="summary-label">Discount:</p>
@@ -117,7 +119,7 @@ const Invoice = ({ settings }) => {
                             </div>
                             <div class="summary-row total">
                                 <p class="summary-label">Total Amount:</p>
-                                <p class="summary-value">₹{invoice?.amount}</p>
+                                <p class="summary-value">₹{subtotal + gst}</p>
                             </div>
                         </div>
                     </div>
