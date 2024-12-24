@@ -20,6 +20,7 @@ const Profile = ({ settings }) => {
     const [imageUrl, setImageUrl] = useState(profile_img);
     const [eye, setEye] = useState(false);
     const [eyeConfirm, SetEyeConfirm] = useState(false);
+    const [userInvoice, setuserInvoice] = useState([]);
 
     const [changePassword, setChangepassword] = useState({
         password: '',
@@ -46,6 +47,24 @@ const Profile = ({ settings }) => {
         };
         document.title = "Netflix - Profile";
 
+    }, []);
+
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/invoice`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        )
+            .then(res => {
+                if (res.data.data) {
+                    setuserInvoice(res.data.data);
+                }
+            })
+            .catch(err => {
+                console.log("Invoice Not Found", err);
+            })
     }, []);
 
     const navigate = useNavigate();
@@ -229,73 +248,105 @@ const Profile = ({ settings }) => {
                             <RiCloseFill className='close-icon-profile' onClick={handleclose} />
                         </Alert>
                     )}
-                    <ul>
-                        <li>
-                            <label>Profile :</label>
-                            <div>
-                                <img src={imageUrl} alt="Profile" className="profile-img" />                                <br />
-                                <input type="file" onChange={fileUpload} name="image" />
-                            </div>
-                        </li>
-                        {user && (
-                            <div>
-                                <li>
-                                    <label>Full Name : </label>
-                                    <input type="text" placeholder="Enter your Name" className="profile-input" name="fullName" value={updateprofile.fullName} onChange={handleedit} />
-                                    {error.fullName && <p className="error"><small>{error.fullName}</small></p>}
-
-                                </li>
-                                <li>
-                                    <label>Email : </label>
-                                    <input type="text" placeholder="Enter your Email" className="profile-input" name="email" value={updateprofile.email} onChange={handleedit} />
-                                    {error.email && <p className="error"><small>{error.email}</small></p>}
-                                </li>
-                                <button className="updateprofile" type="submit">Update Profile</button>
-                            </div>
-                        )}
-                    </ul>
-                    <Popup trigger=
-                        {<Link className="changepassowrd">Change Password ?</Link>}
-                        modal nested>
-                        {
-                            (close) => (
-
-                                <div className='resetpassword-form'>
-                                    <div className="area">
-                                        <RiCloseFill className='close-icon' onClick={() => { setAlert(null); close() }} />
-                                    </div>
-                                    <form onSubmit={(e) => {
-                                        e.preventDefault();
-                                    }}>
-
-                                        <h1>Change Password</h1>
-                                        {alert && (
-                                            <Alert variant={alert.variant} className={`${alert.variant}`}>
-                                                {alert.message}
-                                                <RiCloseFill className='close-icon1' onClick={handleclose} />
-                                            </Alert>
-                                        )}
-
-                                        <input type={eye ? "text" : "password"} placeholder='Password' name="password" onChange={handlechange} value={changePassword.password} />
-                                        <span className="eyeicon1" onClick={handleeye}>{eye ? <FaRegEyeSlash /> : <FaRegEye />}</span>
-                                        {error.password &&
-                                            <p className="error"><small>{error.password}</small></p>
-                                        }
-                                        <input type={eyeConfirm ? "text" : "password"} placeholder='Confirm Password' name="confirmPassword" onChange={handlechange} value={changePassword.confirmPassword} />
-                                        <span className="eyeicon2" onClick={handleeyeConfirm}>{eyeConfirm ? <FaRegEyeSlash /> : <FaRegEye />}</span>
-                                        {error.confirmPassword &&
-                                            <p className="error2"><small>{error.confirmPassword}</small></p>
-                                        }
-                                        <button type="submit" onClick={handlesubmit}>Change Password</button>
-                                        <button type="button" onClick={() => { setAlert(null); close() }}>Close</button>
-                                    </form>
+                    <div className="p_set">
+                        <ul>
+                            <li>
+                                <label>Image :</label>
+                                <div>
+                                    <img src={imageUrl} alt="Profile" className="profile-img" />                                <br />
+                                    <input type="file" onChange={fileUpload} name="image" />
                                 </div>
-                            )
-                        }
-                    </Popup>
+                            </li>
+                            {user && (
+                                <div>
+                                    <li>
+                                        <label>Full Name : </label>
+                                        <input type="text" placeholder="Enter your Name" className="profile-input" name="fullName" value={updateprofile.fullName} onChange={handleedit} />
+                                        {error.fullName && <p className="error"><small>{error.fullName}</small></p>}
+
+                                    </li>
+                                    <li>
+                                        <label>Email : </label>
+                                        <input type="text" placeholder="Enter your Email" className="profile-input" name="email" value={updateprofile.email} onChange={handleedit} />
+                                        {error.email && <p className="error"><small>{error.email}</small></p>}
+                                    </li>
+                                    <button className="updateprofile" type="submit">Update Profile</button>
+                                </div>
+                            )}
+                        </ul>
+                        <Popup trigger=
+                            {<Link className="changepassowrd">Change Password ?</Link>}
+                            modal nested>
+                            {
+                                (close) => (
+
+                                    <div className='resetpassword-form'>
+                                        <div className="area">
+                                            <RiCloseFill className='close-icon' onClick={() => { setAlert(null); close() }} />
+                                        </div>
+                                        <form onSubmit={(e) => {
+                                            e.preventDefault();
+                                        }}>
+
+                                            <h1>Change Password</h1>
+                                            {alert && (
+                                                <Alert variant={alert.variant} className={`${alert.variant}`}>
+                                                    {alert.message}
+                                                    <RiCloseFill className='close-icon1' onClick={handleclose} />
+                                                </Alert>
+                                            )}
+
+                                            <input type={eye ? "text" : "password"} placeholder='Password' name="password" onChange={handlechange} value={changePassword.password} />
+                                            <span className="eyeicon1" onClick={handleeye}>{eye ? <FaRegEyeSlash /> : <FaRegEye />}</span>
+                                            {error.password &&
+                                                <p className="error"><small>{error.password}</small></p>
+                                            }
+                                            <input type={eyeConfirm ? "text" : "password"} placeholder='Confirm Password' name="confirmPassword" onChange={handlechange} value={changePassword.confirmPassword} />
+                                            <span className="eyeicon2" onClick={handleeyeConfirm}>{eyeConfirm ? <FaRegEyeSlash /> : <FaRegEye />}</span>
+                                            {error.confirmPassword &&
+                                                <p className="error2"><small>{error.confirmPassword}</small></p>
+                                            }
+                                            <button type="submit" onClick={handlesubmit}>Change Password</button>
+                                            <button type="button" onClick={() => { setAlert(null); close() }}>Close</button>
+                                        </form>
+                                    </div>
+                                )
+                            }
+                        </Popup>
+                    </div>
                 </form>
                 <Link to="/login" className="changepassowrd" onClick={handlesignout}>SignOut ?</Link>
 
+            </div>
+            <div className="invoices-container">
+                <h2 className="invoices_header">Invoices</h2>
+                <table className="invoice_user">
+                    <thead>
+                        <tr>
+                            <th>Order Date</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {userInvoice.map((item, index) => (
+                            <tr key={index} className="invoice_item">
+                                <td>{new Date(item.validFrom).toLocaleString()}</td>
+                                <td>${item.amount.toFixed(2)}</td>
+                                <td>
+                                    <span className="status_badge success">
+                                        {item.status ? "Success" : "Failed"}
+                                    </span>
+                                </td>
+                                <tc>
+                                    <Link to="" className="detail_button">View Invoice</Link>
+                                </tc>
+                            </tr>
+                        ))
+                        }
+                    </tbody>
+                </table>
             </div>
         </div >
     )

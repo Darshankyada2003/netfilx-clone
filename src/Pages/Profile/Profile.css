@@ -17,12 +17,19 @@
     border-radius: 4px;
     padding: 60px;
     margin: auto;
+    margin-right: 20px;
+    top: 18px;
+    position: relative;
 }
 
 .profile-form h1 {
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    bottom: 50px;
 }
 
 .profile-form ul {
@@ -255,4 +262,71 @@
     bottom: 41px;
     position: relative;
     left: 150px;
+}
+
+/* Invoice Section */
+.invoices-container {
+    width: 100%;
+    max-width: 795px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    padding: 51px;
+    margin-left: 0px;
+    bottom: 670px;
+    position: relative;
+}
+
+.invoices_header {
+    align-items: center;
+    display: flex;
+    bottom: 27px;
+    justify-content: center;
+    position: relative;
+    font-size: 150%;
+}
+
+.invoice_user {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.invoice_user th,
+.invoice_user td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #272424;
+}
+
+.invoice_user th {
+    background-color: #000000;
+    font-weight: bold;
+    bottom: 11px;
+    position: relative;
+}
+
+.status_badge {
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.status_badge.success {
+    background-color: #4caf50;
+}
+
+.detail_button {
+    color: #fff;
+    border: none;
+    padding: 5px 9px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    top: 11px;
+    position: relative;
+    text-decoration: none;
+}
+
+.detail_button:hover {
+    background-color: #e52200;
 }
