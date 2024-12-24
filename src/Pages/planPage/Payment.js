@@ -55,7 +55,7 @@ const handleRazorpayScreen = async (order_id, amount, SubId) => {
             description: 'Payment to Netflix',
             order_id,
             handler: async function (response) {
-                debugger
+
                 const razorpayData = {
                     payment_id: response.razorpay_payment_id,
                     order_id: response.razorpay_order_id,
@@ -69,7 +69,7 @@ const handleRazorpayScreen = async (order_id, amount, SubId) => {
                 }).then(response => response.json())
                     .then(response => {
                         if (response.status) {
-                            window.location.href = `/invoice/${SubId}`;
+                            window.location.href = `/invoice/${response.invoieId}`;
                         } else {
                             alert("Payment verification failed. Please try again.");
                         }
