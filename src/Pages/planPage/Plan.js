@@ -25,7 +25,7 @@ const Plan = ({ settings }) => {
     }, []);
 
     useEffect(() => {
-        document.title = "Netflix-Subscription";
+        document.title = "Netflix - Subscription Plan";
     }, []);
 
     const navigate = useNavigate();

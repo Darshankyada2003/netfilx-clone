@@ -26,6 +26,8 @@ const Invoice = ({ settings }) => {
             .catch(err => {
                 console.log("invoice data is not found", err);
             })
+
+        document.title = "Netflix - Invoice";
     }, [id])
 
     const { invoice, subscription } = invoicedata;

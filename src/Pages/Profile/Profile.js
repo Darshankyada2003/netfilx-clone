@@ -44,6 +44,7 @@ const Profile = ({ settings }) => {
             })
             setImageUrl(userdata.image || profile_img);
         };
+        document.title = "Netflix - Profile";
 
     }, []);
 
@@ -67,6 +68,7 @@ const Profile = ({ settings }) => {
         SetEyeConfirm(!eyeConfirm);
     }
 
+    //Edit Profile API
     const editprofile = (e) => {
         e.preventDefault();
 
@@ -143,6 +145,7 @@ const Profile = ({ settings }) => {
         }
     }
 
+    //Change password API
     const handlesubmit = (e) => {
         e.preventDefault();
 

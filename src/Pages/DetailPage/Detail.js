@@ -20,7 +20,8 @@ const Detail = ({ settings }) => {
             })
             .catch(err => {
                 console.log("error for fetch movie id", err)
-            })
+            });
+            document.title = "Netflix - Movie";
     }, [id])
 
     const NumberFormat = (num) => {
