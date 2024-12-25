@@ -60,8 +60,8 @@ const Invoice = ({ settings }) => {
                     </div>
                     <div className="btn-success">
                         {invoice !== null && (
-                            <p className={invoice ? 'payment-success' : 'payment-failure'}>
-                                {invoice ? 'Success' : 'Failed'}
+                            <p className={invoice?.status ? 'payment-success' : 'payment-failure'}>
+                                {invoice?.status ? 'Success' : 'Failed'}
                             </p>)}
                     </div>
                     <div className="subscription_details">

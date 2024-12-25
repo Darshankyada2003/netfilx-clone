@@ -22,6 +22,11 @@
     position: relative;
 }
 
+.p_set {
+    bottom: 40px;
+    position: relative;
+}
+
 .profile-form h1 {
     font-size: 26px;
     font-weight: 600;
@@ -170,6 +175,14 @@
     text-decoration: none;
 }
 
+.navigate_login {
+    bottom: 18px;
+    position: relative;
+    text-decoration: none;
+    color: white;
+    left: 0px;
+}
+
 .resetpassword-form .alert {
     display: flex;
     justify-content: space-between;
@@ -272,7 +285,7 @@
     border-radius: 4px;
     padding: 51px;
     margin-left: 0px;
-    bottom: 670px;
+    bottom: 571px;
     position: relative;
 }
 
@@ -315,6 +328,10 @@
     background-color: #4caf50;
 }
 
+.status_badge.failed {
+    background-color: red;
+}
+
 .detail_button {
     color: #fff;
     border: none;
@@ -322,11 +339,40 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
-    top: 11px;
+    top: 0px;
     position: relative;
     text-decoration: none;
 }
 
 .detail_button:hover {
     background-color: #e52200;
+}
+
+.pagination {
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    top: 20px;
+    left: 217px;
+    position: relative;
+    gap: 10px;
+}
+
+.pagination_button {
+    background: #000000;
+    padding: 8px 12px;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #7d232e;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.pagination_button:hover {
+    transform: scale(1.1);
+}
+
+.pagination_button.active {
+    color: white;
 }

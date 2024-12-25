@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './Profile.css'
 import 'reactjs-popup'
 import Popup from "reactjs-popup";
@@ -8,7 +8,7 @@ import axios from "axios";
 import { Alert } from 'react-bootstrap'
 import { RiCloseFill } from "react-icons/ri";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-
+import { AiOutlineCamera } from "react-icons/ai";
 
 
 const Profile = ({ settings }) => {
@@ -21,6 +21,8 @@ const Profile = ({ settings }) => {
     const [eye, setEye] = useState(false);
     const [eyeConfirm, SetEyeConfirm] = useState(false);
     const [userInvoice, setuserInvoice] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const invoicePage = 5;
 
     const [changePassword, setChangepassword] = useState({
         password: '',
@@ -49,6 +51,7 @@ const Profile = ({ settings }) => {
 
     }, []);
 
+    //invoice API
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/invoice`,
             {
@@ -66,6 +69,16 @@ const Profile = ({ settings }) => {
                 console.log("Invoice Not Found", err);
             })
     }, []);
+
+    const lastinvoice = currentPage * invoicePage;
+    const firstinvoice = lastinvoice - invoicePage;
+    const currentInvoice = userInvoice.slice(firstinvoice, lastinvoice);
+
+    const totalpage = Math.ceil(userInvoice.length / invoicePage);
+
+    const pageChange = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
 
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
@@ -253,8 +266,11 @@ const Profile = ({ settings }) => {
                             <li>
                                 <label>Image :</label>
                                 <div>
-                                    <img src={imageUrl} alt="Profile" className="profile-img" />                                <br />
-                                    <input type="file" onChange={fileUpload} name="image" />
+                                    <img src={imageUrl} alt="Profile" className="profile-img" />
+                                    <label htmlFor="file-input" style={{ cursor: "pointer" }}>
+                                        <AiOutlineCamera className="upload_icon" />
+                                    </label>
+                                    <input id="file-input" type="file" onChange={fileUpload} name="image" style={{ display: "none" }} />
                                 </div>
                             </li>
                             {user && (
@@ -315,7 +331,7 @@ const Profile = ({ settings }) => {
                         </Popup>
                     </div>
                 </form>
-                <Link to="/login" className="changepassowrd" onClick={handlesignout}>SignOut ?</Link>
+                <Link to="/login" className="navigate_login" onClick={handlesignout}>SignOut ?</Link>
 
             </div>
             <div className="invoices-container">
@@ -330,21 +346,37 @@ const Profile = ({ settings }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {userInvoice.map((item, index) => (
+                        {currentInvoice.length === 0 ? (
+                            <tr>
+                                <td colSpan="4" className="no_invoice">
+                                    No Available Invoice
+                                </td>
+                            </tr>
+                        ) : currentInvoice.map((item, index) => (
                             <tr key={index} className="invoice_item">
                                 <td>{new Date(item.validFrom).toLocaleString()}</td>
-                                <td>${item.amount.toFixed(2)}</td>
+                                <td>₹{item.amount.toFixed(2)}</td>
                                 <td>
-                                    <span className="status_badge success">
+                                    <span className={`status_badge ${item.status ? "success" : "failed"}`}>
                                         {item.status ? "Success" : "Failed"}
                                     </span>
                                 </td>
-                                <tc>
-                                    <Link to="" className="detail_button">View Invoice</Link>
-                                </tc>
+                                <td>
+                                    <Link to={`/invoice/${item.id}`} className="detail_button">View Invoice</Link>
+                                </td>
                             </tr>
                         ))
                         }
+                        <div className="pagination">
+                            {[...Array(totalpage)].map((_, i) => (
+                                <button key={i}
+                                    className={`pagination_button ${currentPage === i + 1 ? "active" : ""}`}
+                                    onClick={() => pageChange(i + 1)}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
+                        </div>
                     </tbody>
                 </table>
             </div>

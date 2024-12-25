@@ -89,3 +89,5 @@ rating library : npm i react-rating
 Reviews convert K / M :  npm install react-number-format
 
 Date formate : npm i luxon
+
+pagination : npm install --save datatables.net-react datatables.net-dt --force or --legacy-peer-deps
