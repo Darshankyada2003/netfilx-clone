@@ -50,21 +50,20 @@ const Home = ({ settings }) => {
     //Movie scroll horizontal 
     const movieRef = useRef([]);
     useEffect(() => {
+        const currentRef = movieRef.current;
         const handleWheel = (e, index) => {
             e.preventDefault();
-            if (movieRef.current[index]) {
-                movieRef.current[index].scrollLeft += e.deltaY;
+            if (currentRef[index]) {
+                currentRef[index].scrollLeft += e.deltaY;
             }
         };
-
-        movieRef.current.forEach((ref, index) => {
+        currentRef.forEach((ref, index) => {
             if (ref) {
                 ref.addEventListener("wheel", (e) => handleWheel(e, index));
             }
         });
-
         return () => {
-            movieRef.current.forEach((ref, index) => {
+            currentRef.forEach((ref, index) => {
                 if (ref) {
                     ref.removeEventListener("wheel", (e) => handleWheel(e, index));
                 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import './Profile.css'
 import 'reactjs-popup'
 import Popup from "reactjs-popup";
@@ -13,6 +13,7 @@ import { AiOutlineCamera } from "react-icons/ai";
 
 const Profile = ({ settings }) => {
 
+    const token = localStorage.getItem("token");
     const [user, setUser] = useState(null);
     const [file, setFile] = useState(null);
     const [alert, setAlert] = useState(null);
@@ -53,6 +54,10 @@ const Profile = ({ settings }) => {
 
     //invoice API
     useEffect(() => {
+        if (!token) {
+            console.log("please log in");
+            return;
+        }
         axios.get(`${process.env.REACT_APP_BASE_URL}/invoice`,
             {
                 headers: {
@@ -68,7 +73,7 @@ const Profile = ({ settings }) => {
             .catch(err => {
                 console.log("Invoice Not Found", err);
             })
-    }, []);
+    }, [token]);
 
     const lastinvoice = currentPage * invoicePage;
     const firstinvoice = lastinvoice - invoicePage;
@@ -81,7 +86,6 @@ const Profile = ({ settings }) => {
     }
 
     const navigate = useNavigate();
-    const token = localStorage.getItem("token");
     if (!token) {
         console.log("please log in");
         return;

@@ -28,7 +28,7 @@ const Invoice = ({ settings }) => {
             })
 
         document.title = "Netflix - Invoice";
-    }, [id])
+    }, [id, token])
 
     const { invoice, subscription } = invoicedata;
     const gst = (invoice?.amount * 18) / 100;
