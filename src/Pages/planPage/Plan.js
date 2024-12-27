@@ -55,7 +55,7 @@ const Plan = ({ settings }) => {
             <br />
             <div className='heading'>
                 <p>SETP 2 OF 2</p>
-                <h2>Choose the plan that’s right for you</h2>
+                <h2>Choose the monthly plan that’s right for you</h2>
             </div>
             <form>
                 <div className='Plans_details'>

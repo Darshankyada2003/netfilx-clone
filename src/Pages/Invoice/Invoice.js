@@ -55,7 +55,7 @@ const Invoice = ({ settings }) => {
 
                 <div className="invoice_body">
                     <div className="invoice_info">
-                        <p>Invoice Date: <strong>{DateTime.fromISO(invoice?.validFrom).toFormat('MMMM dd, yyyy')}</strong></p>
+                        <p>Invoice Date: <strong>{DateTime.fromISO(invoice?.date).toFormat('MMMM dd, yyyy')}</strong></p>
                         <p>Invoice ID : <strong>#{invoice?.id}</strong></p>
                     </div>
                     <div className="btn-success">

@@ -358,7 +358,7 @@ const Profile = ({ settings }) => {
                             </tr>
                         ) : currentInvoice.map((item, index) => (
                             <tr key={index} className="invoice_item">
-                                <td>{new Date(item.validFrom).toLocaleString()}</td>
+                                <td>{new Date(item.date).toLocaleString()}</td>
                                 <td>₹{item.amount.toFixed(2)}</td>
                                 <td>
                                     <span className={`status_badge ${item.status ? "success" : "failed"}`}>
