@@ -90,7 +90,7 @@
     transform: scale(1.05);
 }
 
-.play_icon{
+.play_icon {
     font-size: 24px;
     margin-right: -5px;
 }
@@ -124,22 +124,25 @@
 
 @media (max-width: 480px) {
     .hero-caption {
-        padding-left: 3%;
-        bottom: auto;
+        position: absolute;
+        bottom: 0px;
+        left: 5%;
+        right: 5%;
+        font-size: xx-small;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border-radius: 4px;
     }
 
     .caption-img {
-        max-width: 250px;
-        margin-bottom: 15px;
+        font-size: 14px;
+        margin-bottom: 8px;
     }
 
-    /* .hero-caption p {
-        font-size: 13px;
-    } */
-
     .hero-btn .btn {
-        padding: 4px 12px;
-        font-size: 12px;
+        padding: 6px 12px;
+        font-size: 10px;
     }
 
     .hero-btn .btn img {

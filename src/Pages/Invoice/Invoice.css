@@ -210,3 +210,77 @@
     bottom: 50px;
     position: relative;
 }
+
+@media (max-width: 480px) {
+    .invoice {
+        padding: 0.5rem;
+    }
+
+    .invoice_page {
+        padding: 0.5rem;
+    }
+
+    .invoice_header p {
+        font-size: 0.8rem;
+    }
+
+    .invoice_header h1 {
+        font-size: 28px;
+    }
+
+    .invoice_body h2 {
+        font-size: 16px;
+    }
+
+    .invoice_info {
+        margin-left: 0;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    .subscription_row,
+    .summary-row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 0;
+    }
+
+    .subscription_label,
+    .summary-label {
+        font-size: 14px;
+    }
+
+    .subscription_value,
+    .summary-value {
+        font-size: 14px;
+    }
+
+    .payment-icons img {
+        max-width: 30px;
+    }
+
+    .payment-method,
+    .summary-details {
+        flex: 1 100%;
+        margin-bottom: 20px;
+        padding: 12px;
+    }
+
+    .payment-method h3,
+    .summary-details h3 {
+        font-size: 16px;
+    }
+
+    .payment-info {
+        font-size: 12px;
+    }
+
+    .payment-icons {
+        gap: 10px;
+    }
+
+    .payment-success,
+    .payment-failure {
+        margin-left: 0;
+    }
+}
