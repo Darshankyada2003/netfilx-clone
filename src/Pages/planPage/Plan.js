@@ -11,22 +11,23 @@ const Plan = ({ settings }) => {
     const [plan, setPlan] = useState([]);
     const [selectedPlan, setSelectedPlan] = useState(null);
 
-    //subscription API
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/subscriptions`)
-            .then(res => {
-                if (res.data.status) {
-                    setPlan(res.data.data);
-                }
-            })
-            .catch(err => {
-                console.log("error", err);
-            })
-    }, []);
-
-    useEffect(() => {
+        fatchSubscription();
         document.title = "Netflix - Subscription Plan";
     }, []);
+
+    //subscription API
+    const fatchSubscription = async () => {
+        try {
+            const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/subscriptions`)
+            if (res.data.status) {
+                setPlan(res.data.data);
+            }
+        }
+        catch (err) {
+            console.log(err, "Error from fatchSubscription API");
+        }
+    }
 
     const navigate = useNavigate();
 

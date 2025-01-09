@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import "./Invoice.css";
 import Navbar from "../../component/Navbar/Navbar";
 import axios from "axios";
@@ -11,29 +11,45 @@ const Invoice = ({ settings }) => {
     const { id } = useParams();
     const token = localStorage.getItem("token");
 
-    useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/singleInvoice/${id}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
+    const fetchInvoicedata = useCallback(() => {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/singleInvoice/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then(res => {
                 if (res.data.status) {
-                    setInvoicedata(res.data.data);
+                    setInvoicedata(res.data.data)
                 }
             })
             .catch(err => {
-                console.log("invoice data is not found", err);
+                console.log(err);
             })
-
+    }, [id, token]);
+    useEffect(() => {
+        fetchInvoicedata();
         document.title = "Netflix - Invoice";
-    }, [id, token])
+    }, [fetchInvoicedata])
 
     const { invoice, subscription } = invoicedata;
-    const gst = (invoice?.amount * 18) / 100;
+    const gst = useMemo(() => (invoice?.amount * 18) / 100, [invoice?.amount]);
     const discount = 0.00;
-    const subtotal = (invoice?.amount - gst) - discount;
+    const subtotal = useMemo(() => (invoice?.amount - gst) - discount, [invoice?.amount, gst]);
+    const totalAmount = useMemo(() => subtotal + gst, [subtotal, gst]);
+
+    const invoiceDate = useMemo(() =>
+        (invoice?.date ? DateTime.fromISO(invoice?.date).toFormat('MMMM dd, yyyy') : ""),
+        [invoice?.date]
+    );
+
+    const validFrom = useMemo(() =>
+        (invoice?.validFrom ? DateTime.fromISO(invoice?.validFrom).toFormat('MMMM dd, yyyy') : ""),
+        [invoice?.validFrom]
+    )
+    const validTo = useMemo(() =>
+        (invoice?.validTo ? DateTime.fromISO(invoice?.validTo).toFormat('MMMM dd, yyyy') : ""),
+        [invoice?.validTo]
+    )
 
     return (
         <div className="invoice">
@@ -55,7 +71,7 @@ const Invoice = ({ settings }) => {
 
                 <div className="invoice_body">
                     <div className="invoice_info">
-                        <p>Invoice Date: <strong>{DateTime.fromISO(invoice?.date).toFormat('MMMM dd, yyyy')}</strong></p>
+                        <p>Invoice Date: <strong>{invoiceDate}</strong></p>
                         <p>Invoice ID : <strong>#{invoice?.id}</strong></p>
                     </div>
                     <div className="btn-success">
@@ -88,7 +104,7 @@ const Invoice = ({ settings }) => {
                         </div>
                         <div className="subscription_row">
                             <p className="subscription_label">Date :</p>
-                            <p className="subscription_value">{`${DateTime.fromISO(invoice?.validFrom).toFormat('MMMM dd, yyyy')} - ${DateTime.fromISO(invoice?.validTo).toFormat('MMMM dd, yyyy')}`}</p>
+                            <p className="subscription_value">{validFrom} - {validTo}</p>
                         </div>
                         <div className="subscription_row">
                             <p className="subscription_label">Amount :</p>
@@ -123,7 +139,7 @@ const Invoice = ({ settings }) => {
                             </div>
                             <div class="summary-row total">
                                 <p class="summary-label">Total Amount :</p>
-                                <p class="summary-value">₹{subtotal + gst}.00</p>
+                                <p class="summary-value">₹{totalAmount}.00</p>
                             </div>
                         </div>
                     </div>

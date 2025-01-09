@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import './Detail.css'
 import Footer from "../../component/Footer/Footer";
@@ -12,19 +12,22 @@ const Detail = ({ settings }) => {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/movie/${id}`)
-            .then(res => {
-                if (res.data.status) {
-                    setMovie(res.data.data)
-                }
-            })
-            .catch(err => {
-                console.log("error for fetch movie id", err)
-            });
-            document.title = "Netflix - Movie";
+        fatchMovie();
     }, [id])
 
-    const NumberFormat = (num) => {
+    const fatchMovie = async () => {
+        try {
+            const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/movie/${id}`)
+            if (res.data.status) {
+                setMovie(res.data.data);
+            }
+        }
+        catch (err) {
+            console.log(err, "Error form fatchMovie API")
+        }
+    }
+
+    const NumberFormat = useCallback((num) => {
         if (num >= 1000000) {
             return (num / 1000000).toFixed(1) + "M";
         } else if (num >= 1000) {
@@ -32,7 +35,12 @@ const Detail = ({ settings }) => {
         } else {
             return num.toString();
         }
-    }
+    }, []);
+
+    const formateVouteCount = useMemo(() =>
+        NumberFormat(movie?.vote_count || 0),
+        [movie?.vote_count]);
+
     return (
 
 
@@ -71,7 +79,7 @@ const Detail = ({ settings }) => {
                         </p>
                         <p className="movie-info">
                             Review:
-                            {NumberFormat(movie.vote_count)}
+                            {formateVouteCount}
                         </p>
                     </div>
                 </div>
